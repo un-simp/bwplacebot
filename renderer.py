@@ -4,7 +4,7 @@ import time
 import socketio
 SERVER_URL = "http://5.59.97.201:6969/"
 
-image = Image.open("cd.png")
+image = Image.open("copy_floppy.png")
 width, height = image.size
 
 image = image.convert("RGBA")
@@ -32,11 +32,14 @@ while True:
                     r,g,b,a = pixel
                     print(pixel)
                     if a > 0: 
-                        update_pixel(x, y +100, r, g, b)
-                        time.sleep(0.001)
+                        update_pixel(x, y +220, r, g, b)
+                        time.sleep(0.05)
                 else:
                     print(f"Unexpected pixel format at ({x}, {y}): {pixel}")
             except Exception as e:
+                file = open("errors","+a")
+                file.write(f"Error processing pixel at ({x}, {y}): {e}")
+                file = None
                 print(f"Error processing pixel at ({x}, {y}): {e}")
 
 print("Finished updating the canvas!")
